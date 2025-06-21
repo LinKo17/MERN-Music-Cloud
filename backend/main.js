@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 
@@ -5,6 +6,13 @@ const app = express();
 const PORT = process.env.PORT || 2000;
 
 // third-party module
+const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
+
+// Database
+const dbConnection = require('./config/database/dbConnection');
+dbConnection();
+
 // built-in module
 const path = require('path');
 
@@ -16,12 +24,23 @@ const { Log, errorLog } = require('./middleware/logEvent');
 
 // route
 app.use(Log);
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+app.use(cookieParser());
 
 const homeRoute = require('./routes/web/home');
 app.use("/",homeRoute);
 
 const musicRoute = require('./routes/api/music');
 app.use("/api/musics/", musicRoute);
+
+const userRoute = require('./routes/api/user');
+// const exp = require('constants');
+app.use("/api/users",userRoute);
+
+// testing
+// const testRoute = require('./middleware/verfiyToken');
+// app.post("/test", testRoute);
 
 // 404 route
 app.use((req, res, next) => {
@@ -39,4 +58,8 @@ app.use((req, res, next) => {
 
 app.use(errorLog);
 
-app.listen(PORT,() => console.log(`http://localhost:${PORT}`));
+mongoose.connection.once('open',() => {
+  console.log('Database is successfully connected');
+  console.log(`${process.env.DB_CONNECTION}`);
+  app.listen(PORT,() => console.log(`http://localhost:${PORT}`));
+})
