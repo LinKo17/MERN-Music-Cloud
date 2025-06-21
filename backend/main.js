@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 2000;
 // third-party module
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 // Database
 const dbConnection = require('./config/database/dbConnection');
@@ -18,7 +19,7 @@ const path = require('path');
 
 // custom module
 const { Log, errorLog } = require('./middleware/logEvent');
-
+const corsOption = require('./config/origins/corsOption');
 
 
 
@@ -27,6 +28,8 @@ app.use(Log);
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
+
+app.use(cors(corsOption));
 
 const homeRoute = require('./routes/web/home');
 app.use("/",homeRoute);
