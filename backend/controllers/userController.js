@@ -15,9 +15,13 @@ const login = async (req,res) => {
     if(!result.isEmpty()) return res.status(400).json({'message': result.array()});
     const { email, password } = matchedData(req);
     const verifyUser = await USER.findOne({email}).exec();
-    if(!verifyUser) return res.status(401).json({'message': 'Invalid Credential'});
+    if(!verifyUser) return res.status(401).json({'message': [
+        {type: "field", msg: "Invalid Credential", path: "email"}
+    ]});
     const verfiyPassword = await bcrypt.compare(password,verifyUser.password);
-    if(!verfiyPassword) return res.status(401).json({'message':'Invalid Credential'});
+    if(!verfiyPassword) return res.status(401).json({'message': [
+        {type: "field", msg: "Invalid Credential", path: "email"}
+    ]});
 
     const accessToken = jwt.sign(
         {
@@ -55,7 +59,9 @@ const register = async (req,res) => {
     const {name, email, password } = matchedData(req);
     
     const checkEmail = await USER.findOne({email});
-    if(checkEmail) return res.json({'message': "Email already exists"});
+    if(checkEmail) return res.status(400).json({'message': [
+        {type: "field", msg: "The email is already registered", path: "email"}
+    ]});
     const user = new USER({
         name,
         email,

@@ -4,7 +4,7 @@ const registerValidationSchema = [
   body('name')
     .notEmpty().withMessage('Name is required')
     .isString().withMessage('Name must be character')
-    .isLength({ min: 6, max: 12 }).withMessage('Name must be 6–12 characters'),
+    .isLength({ min: 6, max: 24 }).withMessage('Name must be 6–24 characters'),
 
   body('email')
     .notEmpty().withMessage('Email is required')
