@@ -85,6 +85,7 @@ const logout = async (req,res) => {
         return res.sendStatus(401);
     }
 
+    verifyUser.refreshToken = "";
     await verifyUser.save();
     res.clearCookie('jwt',{httpOnly:true, sameSite: process.env.SAME_SITE, secure: process.env.ENV_SECURE === 'true'});
 

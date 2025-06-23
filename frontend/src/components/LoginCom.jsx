@@ -9,8 +9,6 @@ function LoginCom () {
         password : ""
     });
 
-    console.log(isLoading);
-    console.log(error);
     
     function loginHandler(e){
         e.preventDefault();

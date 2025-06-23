@@ -17,6 +17,6 @@ router.post('/login',loginValidationSchema,login);
 router.post('/register',registerValidationSchema,register);
 
 router.post('/logout', verfiyToken, logout);
-router.post('/refreshToken', verfiyToken, refreshToken);
+router.post('/refreshToken', refreshToken);
 
 module.exports = router

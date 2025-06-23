@@ -1,11 +1,12 @@
 import { useState } from "react"
 import { useNavigate } from 'react-router-dom'
 
+
 const useRegister = () => {
     const navigate = useNavigate();
+    
     const [ isLoading, setIsLoading ] = useState(false);
     const [ error, setError ] = useState([]);
-    const [ registerSuccess, setRegisterSuccess ] = useState(false)
     const register = async (data) => {
         setIsLoading(true);
 
@@ -18,21 +19,18 @@ const useRegister = () => {
         });
 
 
-        const result = await response.json();
-        console.log(result);
-        
+        const result = await response.json();        
 
         if(response.ok){
             setIsLoading(false);
-            setRegisterSuccess(true)
-            navigate("/login");
+            navigate("/login", { state: { registered : true } });
         }else{
             setIsLoading(false);
             setError(result && result.message);
         }
     }
 
-    return [ isLoading, error, register , registerSuccess];
+    return [ isLoading, error, register ];
 }
 
 export default useRegister
