@@ -49,8 +49,12 @@ function Navigation (){
 
                     {
                         token ?
-                            <nav className="text-base sm:text-lg font-sans space-x-3 text-white ">
+                            <nav className="text-base sm:text-lg font-sans space-x-8 text-white ">
+
+                                <Link to="/playlists" className="hover:text-cyan-300 opacity-75 hover:opacity-100 transition ease-in-out duration-300">PlayLists</Link> 
+
                                 <button className="bg-blue-600 py-1 px-2 rounded cursor-pointer active:scale-90 transition duration-100" onClick={LogoutHandler} disabled={isLoading}>Logout</button>
+
                             </nav>
                         :
                             <nav className="text-base sm:text-lg font-sans space-x-3 text-white ">
