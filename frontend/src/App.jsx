@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 // components
@@ -19,10 +19,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Navigation />}>
-            <Route index element={<Home/>}/>
-            <Route path="/playlists" element={<PlayLists/>} />
-            <Route path="/login" element={<Login /> } />
-            <Route path="/register" element={<Register/>} />
+            <Route index element={ token ? <Home/> : <Navigate to="/login"/>}/>
+            <Route path="/playlists" element={token ? <PlayLists/>  : <Navigate to="/login"/>} />
+            <Route path="/login" element={!token ? <Login/> : <Navigate to="/"/> } />
+            <Route path="/register" element={!token ? <Register/> : <Navigate to="/"/>} />
           </Route>
 
           <Route path="*" element={<h1>404 Not Found</h1>} />
