@@ -34,16 +34,12 @@ app.use(cors(corsOption));
 const homeRoute = require('./routes/web/home');
 app.use("/",homeRoute);
 
-const musicRoute = require('./routes/api/music');
-app.use("/api/musics/", musicRoute);
 
 const userRoute = require('./routes/api/user');
-// const exp = require('constants');
 app.use("/api/users",userRoute);
 
-// testing
-// const testRoute = require('./middleware/verfiyToken');
-// app.post("/test", testRoute);
+const playlistRoute = require('./routes/api/playlist');
+app.use("/api/playlists",playlistRoute);
 
 // 404 route
 app.use((req, res, next) => {
