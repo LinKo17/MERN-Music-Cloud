@@ -23,9 +23,15 @@ const create = async (req,res) => {
         if(playlistOption == "new"){
             const { playlistName,option} = req.body
             //validation section
-            if(!playlistName) return res.status(400).json({'message':'Playlist Name is required'});
-            if(playlistName.length >= 1 && playlistName <= 30) return res.status(400).json({'message':'Music Name must be 1–30 characters'});
-            if(!option) return res.status(400).json({'message':'Option is required'});
+            if(!playlistName) return res.status(400).json({'message': [
+                {type: "field", msg: "playlist name is required ", path: "playlistName"}
+            ]});
+            if(playlistName.length >= 1 && playlistName <= 30) return res.status(400).json({'message': [
+                {type: "field", msg: "playlist name must be 1–30 characters", path: "playlistName"}
+            ]});
+            if(!option) return res.status(400).json({'message': [
+                {type: "field", msg: "option is required", path: "option"}
+            ]});
 
             // store music inside playlist
             const playlist = new PLAYLIST({
