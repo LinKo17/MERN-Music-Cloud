@@ -4,12 +4,15 @@ const useAddMusic = () => {
     const [ isLoading, setIsLoading ] = useState(false);
     const [ error, setError ] = useState([]);
 
-    const addMusic = async (formData) => {
+    const addMusic = async (formData,token) => {
         setIsLoading(true)
         setError([])
         const response = await fetch(`${import.meta.env.VITE_BACKEND_PLAYLIST_URL}/create`,{
             method : "POST",
             credentials : 'include',
+            headers:{
+                'Authorization': `Bearer ${token}`
+            },
             body : formData
         });
 

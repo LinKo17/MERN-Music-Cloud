@@ -1,8 +1,10 @@
 import { useState } from "react"
 import useAddMusic from "../hook/useAddMusic";
-
+import { useSelector } from "react-redux"
 function AddMusic(){
     // const [checkPlaylistTap, setCheckPlaylistTap ] = useState("new")
+    const token = useSelector(state => state.auth.token);
+
     const [ uploadMusic, setUploadMusic ] = useState({
         playlistOption : "new",
         playlistName : "",
@@ -22,7 +24,7 @@ function AddMusic(){
         formData.append("musicName", uploadMusic.musicName);
         formData.append("musicFile", uploadMusic.musicFile);
         formData.append("option", uploadMusic.option);
-        addMusic(formData)
+        addMusic(formData,token)
     }
 
     return (
