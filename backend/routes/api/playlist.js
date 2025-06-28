@@ -4,6 +4,8 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 
+const verfiyToken = require('../../middleware/verfiyToken');
+
 // validation 
 const addMusicSchema = require('../../config/validation/addMusicValidationSchema')
 
@@ -44,12 +46,22 @@ const multerErrorHandler = (err, req, res, next) => {
 
 const {
     create,
+    show,
     playlistDel,
     musicDel
 } = require('../../controllers/playlistController');
 
 // create playlist
-router.post('/create', upload.single('musicFile'), multerErrorHandler, addMusicSchema, create );
+router.post('/create', 
+  verfiyToken,
+  upload.single('musicFile'), 
+  multerErrorHandler, 
+  addMusicSchema, 
+  create );
+
+
+// show playlist
+router.post('/show',verfiyToken,show);
 
 // delete playlist
 router.post('/delete', playlistDel);

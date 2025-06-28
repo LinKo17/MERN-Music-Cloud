@@ -12,7 +12,7 @@ const create = async (req,res) => {
 
     const {originalname} = req.file;
     const { playlistOption, musicName } = matchedData(req);
-    const email = "default@gmail.com";
+    const email = req.user.email;
 
     try{
         // change file name
@@ -60,6 +60,12 @@ const create = async (req,res) => {
 
 }
 
+const show = async (req,res) => {
+    const email = req.user.email;
+    const playlists = await PLAYLIST.find({email});
+    res.status(200).json({'message': playlists});
+}
+
 const playlistDel = (req,res) => {
     return res.json({'message': 'deleting playlist'});
 }
@@ -70,6 +76,7 @@ const musicDel = (req,res) => {
 
 module.exports = {
     create,
+    show,
     playlistDel,
     musicDel
 }
