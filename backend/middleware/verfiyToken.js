@@ -9,7 +9,9 @@ function verfiyToken(req,res,next){
         accessToken,
         process.env.SECRET_ACCESS_TOKEN,
         (error,decoded) => {
-            if(error) return res.sendStatus(401);
+            if(error) return res.status(401).json({'message': [
+                {type: "field", msg: "Unauthorized", path: "none"}
+            ]});
             req.user = decoded;
             next();
         }

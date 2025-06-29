@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import useAddMusic from "../hook/useAddMusic";
 import { useSelector } from "react-redux"
 
@@ -15,7 +15,7 @@ function AddMusic(){
         option :""
     });
 
-    const [ isLoading, error, addMusic ] = useAddMusic();
+    const [ isLoading, error, addMusic, successUpload ] = useAddMusic();
 
     function uploadMusicHandler(e){
         e.preventDefault();
@@ -27,6 +27,18 @@ function AddMusic(){
         formData.append("option", uploadMusic.option);
         addMusic(formData,token)
     }
+
+    useEffect(() => {
+        if(successUpload){
+            setUploadMusic({
+                playlistOption : "new",
+                playlistName : "",
+                musicName : "",
+                musicFile : "",
+                option :""
+            })
+        }
+    },[successUpload])
 
     return (
         <section className="bg-white w-4/5 sm:w-1/2 lg:w-1/3 m-auto rounded-lg py-2 px-5 select-none mt-5 sm:mt-6  lg:mt-10">
