@@ -1,9 +1,10 @@
 import { useState } from "react"
 import useAddMusic from "../hook/useAddMusic";
 import { useSelector } from "react-redux"
+
 function AddMusic(){
-    // const [checkPlaylistTap, setCheckPlaylistTap ] = useState("new")
     const token = useSelector(state => state.auth.token);
+    const playlist = useSelector(state => state.playlist.playlists)
 
     const [ uploadMusic, setUploadMusic ] = useState({
         playlistOption : "new",
@@ -14,7 +15,6 @@ function AddMusic(){
     });
 
     const [ isLoading, error, addMusic ] = useAddMusic();
-    console.log(error)
 
     function uploadMusicHandler(e){
         e.preventDefault();

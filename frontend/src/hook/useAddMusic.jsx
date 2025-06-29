@@ -21,12 +21,9 @@ const useAddMusic = () => {
         if(response.ok){
             setIsLoading(false)
             setError([])
-            console.log("OK")
         }else{
             setIsLoading(false)
-            // console.log(result)
             setError(result.message)
-            console.log("NOT OK")
         }
 
     }
