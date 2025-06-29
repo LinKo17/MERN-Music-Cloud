@@ -1,7 +1,11 @@
 import { createSlice } from  '@reduxjs/toolkit'
 
 const initialState = {
-    playlists : null
+    playlists : {
+        playlistLoading : true,
+        playlistError : [],
+        playlistData : []
+    }
 }
 
 const playlistSlice = createSlice({
