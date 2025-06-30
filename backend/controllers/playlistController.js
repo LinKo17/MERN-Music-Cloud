@@ -70,6 +70,19 @@ const show = async (req,res) => {
     res.status(200).json({'message': playlists});
 }
 
+const playlist = async (req,res) => {
+    const {playlist_name} = req.body;
+    const takePT = await PLAYLIST.findOne({email:req.user.email,playlist_name});
+    if(!takePT) return res.status(400).json({
+        "message": [
+            {type: "field", msg: "playlist name is invalid", path: "none"}
+        ]
+    })
+    return res.send({
+        message : takePT
+    });
+}
+
 const playlistDel = (req,res) => {
     return res.json({'message': 'deleting playlist'});
 }
@@ -81,6 +94,7 @@ const musicDel = (req,res) => {
 module.exports = {
     create,
     show,
+    playlist,
     playlistDel,
     musicDel
 }

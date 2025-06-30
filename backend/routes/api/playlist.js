@@ -47,6 +47,7 @@ const multerErrorHandler = (err, req, res, next) => {
 const {
     create,
     show,
+    playlist,
     playlistDel,
     musicDel
 } = require('../../controllers/playlistController');
@@ -62,6 +63,9 @@ router.post('/create',
 
 // show playlist
 router.post('/show',verfiyToken,show);
+
+// single playlist
+router.post('/playlist', verfiyToken,playlist);
 
 // delete playlist
 router.post('/delete', playlistDel);

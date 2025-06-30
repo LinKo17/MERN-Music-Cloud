@@ -1,10 +1,15 @@
-function SinglePlayList({obj}){
+import { useNavigate } from "react-router-dom"
 
-    function playHandler(){
-        console.log("play")
+function SinglePlayList({obj}){
+    const navigate = useNavigate();
+
+    function playHandler(e){
+        document.cookie = `playingPT=${e}`
+        navigate('/');
     }
 
-    function deleteHandler(){
+    function deleteHandler(e){
+        console.log(e)
         console.log("delete")
     }
 
@@ -25,8 +30,8 @@ function SinglePlayList({obj}){
                             {e.split("_")[3].split(".")[0] } 
                         </div>
                         <div className="space-x-2 absolute right-0 top-10 opacity-0 group-hover:opacity-100 group-hover:top-1 transition-all duration-500">
-                            <span className="text-xl cursor-pointer" onClick={playHandler}>▶</span>
-                            <span className="text-xl cursor-pointer" onClick={deleteHandler}>🗑️</span>
+                            <span className="text-xl cursor-pointer" onClick={() => playHandler(obj.playlist_name)}>▶</span>
+                            <span className="text-xl cursor-pointer" onClick={() => deleteHandler(e)}>🗑️</span>
                         </div>
                     </div>)
                 }
