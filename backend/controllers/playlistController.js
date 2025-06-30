@@ -26,6 +26,10 @@ const create = async (req,res) => {
             if(!playlistName) return res.status(400).json({'message': [
                 {type: "field", msg: "playlist name is required ", path: "playlistName"}
             ]});
+            const checkPlaylistUnique = await PLAYLIST.findOne({email,playlist_name:playlistName});
+            if(checkPlaylistUnique) return res.status(400).json({'message': [
+                {type: "field", msg: "playlist name must be unique ", path: "playlistName"}
+            ]});
             if(playlistName.length >= 1 && playlistName <= 30) return res.status(400).json({'message': [
                 {type: "field", msg: "playlist name must be 1–30 characters", path: "playlistName"}
             ]});
