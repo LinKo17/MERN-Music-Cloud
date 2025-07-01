@@ -4,7 +4,7 @@ const router = express.Router();
 const registerValidationSchema = require('../../config/validation/registerValidationSchema')
 const loginValidationSchema = require('../../config/validation/loginValidationSchema')
 
-const verfiyToken = require('../../middleware/verfiyToken');
+const verifyToken = require('../../middleware/verifyToken');
 
 const {
     login,
@@ -16,7 +16,7 @@ const {
 router.post('/login',loginValidationSchema,login);
 router.post('/register',registerValidationSchema,register);
 
-router.post('/logout', verfiyToken, logout);
+router.post('/logout', verifyToken, logout);
 router.post('/refreshToken', refreshToken);
 
 module.exports = router

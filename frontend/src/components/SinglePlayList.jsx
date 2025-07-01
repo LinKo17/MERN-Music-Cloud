@@ -1,16 +1,20 @@
 import { useNavigate } from "react-router-dom"
+import useDeleteSingleMusic from "../hook/useDeleteSingleMusic";
 
 function SinglePlayList({obj}){
     const navigate = useNavigate();
+    const [ isLoading, error, deleteSingleMusic] = useDeleteSingleMusic();
 
     function playHandler(e){
         document.cookie = `playingPT=${e}`
         navigate('/');
     }
 
-    function deleteHandler(e){
-        console.log(e)
-        console.log("delete")
+    function deleteHandler(obj,e){
+        deleteSingleMusic({
+            _id : obj._id,
+            music_name : e
+        })
     }
 
     return (
@@ -31,7 +35,7 @@ function SinglePlayList({obj}){
                         </div>
                         <div className="space-x-2 absolute right-0 top-10 opacity-0 group-hover:opacity-100 group-hover:top-1 transition-all duration-500">
                             <span className="text-xl cursor-pointer" onClick={() => playHandler(obj.playlist_name)}>▶</span>
-                            <span className="text-xl cursor-pointer" onClick={() => deleteHandler(e)}>🗑️</span>
+                            <span className="text-xl cursor-pointer" onClick={() => deleteHandler(obj,e)}>🗑️</span>
                         </div>
                     </div>)
                 }

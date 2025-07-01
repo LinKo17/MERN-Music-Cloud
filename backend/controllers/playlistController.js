@@ -87,8 +87,26 @@ const playlistDel = (req,res) => {
     return res.json({'message': 'deleting playlist'});
 }
 
-const musicDel = (req,res) => {
-    return res.json({'message': 'deleting music'});
+const musicDel = async (req,res) => {
+    const {_id, music_name} = (req.body)
+    if(!_id || !music_name) return res.status(400).json({
+        message : [
+            {type: "field", msg: "Information are invalid", path: "none"}
+        ]
+    });
+    const findPT = await PLAYLIST.findOne({_id});
+        if(!findPT) return res.status(400).json({
+        message : [
+            {type: "field", msg: "Information are invalid", path: "none"}
+        ]
+    });
+
+    findPT.music_name = findPT.music_name.filter(music => music !== music_name)
+    await findPT.save();
+    await fsPromise.unlink(path.join(__dirname,"..","uploads",music_name));
+    const findPlaylist = await PLAYLIST.find({email: req.user.email});
+    
+    return res.status(200).json({'message':findPlaylist});
 }
 
 module.exports = {

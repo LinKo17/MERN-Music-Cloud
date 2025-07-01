@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-function verfiyToken(req,res,next){
+function verifyToken(req,res,next){
     const { authorization } = req.headers;
     if(!authorization || !authorization.startsWith('Bearer ')) return res.status(401).json({'message' : 'Invalid token'});
     const accessToken = authorization.split(' ')[1];
@@ -19,4 +19,4 @@ function verfiyToken(req,res,next){
 
 }
 
-module.exports = verfiyToken;
+module.exports = verifyToken;
