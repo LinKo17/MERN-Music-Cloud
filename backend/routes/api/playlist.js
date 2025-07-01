@@ -68,7 +68,7 @@ router.post('/show',verifyToken,show);
 router.post('/playlist', verifyToken,playlist);
 
 // delete playlist
-router.post('/delete', playlistDel);
+router.post('/delete', verifyToken, playlistDel);
 
 // delete music
 router.post('/music', verifyToken, musicDel)

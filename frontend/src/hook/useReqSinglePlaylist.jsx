@@ -9,7 +9,6 @@ const useReqSinglePlaylist = () => {
     const [ playlistData , setPlaylistData ] = useState([])
 
     const cookieResult = document.cookie ? document.cookie.split("=")[1] : "";
-    console.log(cookieResult);
 
     useEffect(() => {
         async function fetchingData(){

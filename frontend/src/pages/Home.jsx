@@ -2,7 +2,6 @@ import useReqSinglePlaylist from "../hook/useReqSinglePlaylist";
 
 function Home(){
     const [ isLoading, error, playlistData] = useReqSinglePlaylist();
-    console.log(error)
     
     return (
         <div className="h-screen flex flex-col items-center mt-6">

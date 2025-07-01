@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom"
 import useDeleteSingleMusic from "../hook/useDeleteSingleMusic";
+import useDeleteSinglePlaylist from "../hook/useDeleteSinglePlaylist";
 
 function SinglePlayList({obj}){
     const navigate = useNavigate();
-    const [ isLoading, error, deleteSingleMusic] = useDeleteSingleMusic();
+    const [ , , deleteSingleMusic] = useDeleteSingleMusic();
+    const [ , , deleteSinglePlaylist] = useDeleteSinglePlaylist();
 
     function playHandler(e){
         document.cookie = `playingPT=${e}`
@@ -17,15 +19,26 @@ function SinglePlayList({obj}){
         })
     }
 
+    function deletePlaylist(obj){
+        if(confirm("Are you sure?")){
+            deleteSinglePlaylist({
+                _id : obj._id
+            })
+        }
+    }
+
     return (
         <section className="select-none pb-10">
             <div className="flex justify-between bg-blue-500 text-white px-2 py-3 text-lg rounded rounded-b-none">
                 <span>{obj.playlist_name}</span>
-                <span className="cursor-pointer">
-                    {
-                        obj.option == "public" ? "🌐" : "🔒"
-                    }
-                </span>
+                <div>
+                    <span className="cursor-pointer me-2" onClick={() => deletePlaylist(obj)}>🗑️</span>
+                    <span className="cursor-pointer">
+                        {
+                            obj.option == "public" ? "🌐" : "🔒"
+                        }
+                    </span>
+                </div>
             </div>
             <div className="min-h-1 max-h-40 overflow-y-scroll overflow-x-hidden border border-t-0 border-l-0 border-r-0 border-gray-500">
                 {

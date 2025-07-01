@@ -83,8 +83,32 @@ const playlist = async (req,res) => {
     });
 }
 
-const playlistDel = (req,res) => {
-    return res.json({'message': 'deleting playlist'});
+const playlistDel = async (req,res) => {
+    const { _id } = req.body
+    const { email } = req.user
+
+    if(!_id ) return res.status(400).json({
+        message : [
+            {type: "field", msg: "Information are invalid", path: "none"}
+        ]
+    });
+
+    const findUser = await PLAYLIST.findOne({_id});
+
+    const deletePT = await PLAYLIST.deleteOne({ _id, email});
+    if(deletePT && deletePT.deletedCount > 0){
+        await Promise.all(
+            findUser.music_name.map(name => fsPromise.unlink(path.join(__dirname,"..","uploads",name)))
+        )
+        const findPlaylist = await PLAYLIST.find({email: req.user.email});
+        return res.status(200).json({'message':findPlaylist});
+    }
+
+    return res.status(400).json({
+        message : [
+            {type: "field", msg: "Information are invalid", path: "none"}
+        ]
+    });
 }
 
 const musicDel = async (req,res) => {
