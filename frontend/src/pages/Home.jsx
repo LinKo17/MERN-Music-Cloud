@@ -1,8 +1,10 @@
+import { useState } from "react";
 import useReqSinglePlaylist from "../hook/useReqSinglePlaylist";
 
 function Home(){
     const [ isLoading, error, playlistData] = useReqSinglePlaylist();
-    
+    const [ music,setMusic ] = useState(null);
+
     return (
         <div className="h-screen flex flex-col items-center mt-6">
             <h1 className="text-3xl font-bold select-none text-gray-400 font-mono">Enjoy your Life</h1>
@@ -16,7 +18,7 @@ function Home(){
                     :
                     <div className="text-lg h-50 overflow-hidden overflow-y-scroll px-3">
                         {
-                            playlistData.music_name.map(music => <div key={music} className="border-b-1 text-cyan-700 border-gray-300 pt-2 pb-4 text-center cursor-pointer hover:opacity-75">{music.split("_")[3].split(".")[0]}</div>)
+                            playlistData.music_name.map(music => <div key={music} className="border-b-1 text-cyan-700 border-gray-300 pt-2 pb-4 text-center cursor-pointer hover:opacity-75" onClick={() => setMusic(`${import.meta.env.VITE_BACKEND_UPLOADS_URL}/${music}`)}>{music.split("_")[3].split(".")[0]}</div>)
                         }
                     </div>
                 }
@@ -30,6 +32,9 @@ function Home(){
                         <span className="text-3xl cursor-pointer active:scale-80 duration-500 hidden absolute">⏹️</span>
                         <span className="text-3xl cursor-pointer active:scale-80 duration-500 absolute right-0">⏭️</span>
                     </div>
+                    {/* ------------------ */}
+                        {/* <audio src={music} controls/> */}
+                    {/* ------------------ */}
                 </div>
                 <div className="mt-20 text-cyan-500 text-lg font-bold font-monospace select-none text-center bg-">{playlistData.playlist_name}</div>
             </section>
