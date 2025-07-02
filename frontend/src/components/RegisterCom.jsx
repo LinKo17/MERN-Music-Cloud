@@ -17,11 +17,11 @@ function RegisterCom() {
 
     return (
         //Registeration Form
-        <section className="bg-white w-4/5 sm:w-1/2 lg:w-1/3 rounded-lg p-4 select-none">
+        <section className="backdrop-blur-md bg-white/10 border border-white/30 rounded-xl w-4/5 sm:w-1/2 lg:w-1/3  p-4 select-none">
 
-            <h3 className="text-2xl font-extrabold text-center text-black mb-4">Register</h3>
+            <h3 className="text-2xl font-extrabold text-center  mb-4 text-white">Register</h3>
 
-            <form onSubmit={registerHandler}>
+            <form onSubmit={registerHandler} className="text-white">
                 <div className="my-3 flex flex-col">
                     <label htmlFor="nameTap" className="text-[17px]">Name</label>
                     <input type="text" placeholder="name" id="nameTap" className="border p-2 rounded focus:outline-none focus:ring-2 focus:ring-cyan-300 mt-1" value={userData.name} onChange={e => setUserData({...userData, name : e.target.value}) }/>
@@ -65,7 +65,7 @@ function RegisterCom() {
                 </div>
 
                 <div className="mt-5">
-                    <button className="bg-blue-500 w-full text-white p-2 cursor-pointer rounded active:scale-95 transition duration-300 ease-in-out" disabled={isLoading}>Register</button>
+                    <button className="bg-rose-800 w-full text-white p-2 cursor-pointer rounded active:scale-95 transition duration-300 ease-in-out" disabled={isLoading}>Register</button>
                 </div>
             </form>
 

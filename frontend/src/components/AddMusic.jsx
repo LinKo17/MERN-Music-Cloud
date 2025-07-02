@@ -41,12 +41,12 @@ function AddMusic(){
     },[successUpload])
 
     return (
-        <section className="bg-white w-4/5 sm:w-1/2 lg:w-1/3 m-auto rounded-lg py-2 px-5 select-none mt-5 sm:mt-6  lg:mt-10">
-            <h1 className="text-center text-lg sm:text-2xl mb-4">Add Music</h1>
+        <section className="backdrop-blur-md bg-white/10 border border-white/30 rounded-xl w-4/5 sm:w-1/2 lg:w-1/3 m-auto -lg py-2 px-5 select-none mt-5 sm:mt-6  lg:mt-10">
+            <h1 className="text-center text-lg sm:text-2xl mb-4 text-white">Add Music</h1>
 
             {
                 !playlistLoading && 
-                <form onSubmit={uploadMusicHandler} encType="multipart/form-data">
+                <form onSubmit={uploadMusicHandler} encType="multipart/form-data" className="text-white">
 
                     <div className="my-3 flex flex-col">
                         <label htmlFor="playlistTap" className="text-[17px]">Playlist</label>
@@ -120,7 +120,7 @@ function AddMusic(){
                     }
 
                     <div className="my-3">
-                        <button className="bg-blue-500 text-center p-2 w-full rounded text-white cursor-pointer active:scale-95 transition duration-100" disabled={isLoading}>Submit</button>
+                        <button className="bg-rose-800 text-center p-2 w-full rounded text-white cursor-pointer active:scale-95 transition duration-100" disabled={isLoading}>Submit</button>
                     </div>
 
                 </form>
