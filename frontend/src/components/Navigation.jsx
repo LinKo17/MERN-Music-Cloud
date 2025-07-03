@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { Link, Outlet, useLocation } from "react-router-dom"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { ASSIGN } from "@/context/AuthSlice";
 import useLogout from "../hook/useLogout";
 
@@ -40,10 +40,12 @@ function Navigation (){
         logout(token)
     }
 
+    const [ mobileMenu, setMobileMenu ] = useState(false)
+    console.log(mobileMenu)
     return (
         <>
 
-            <header className="bg-gray-900 sticky top-0 opacity-80 z-100">
+            <header className={`bg-gray-900 sticky top-0 ${mobileMenu ? "opacity-100" : "opacity-80"} z-100`}>
 
                 <section className="max-w-6xl text-rose-800 mx-auto flex justify-between py-4 px-1 lg:px-0 select-none">
                     <Link to="/" className="text-lg sm:text-2xl font-serif">
@@ -53,19 +55,19 @@ function Navigation (){
                     {
                         token ?
                             <>
-                                <nav className="text-base sm:text-lg font-sans space-x-8 text-white hidden sm:block">
+                                <nav className={`${mobileMenu ? "bg-black absolute top-0 w-full h-screen text-white  flex flex-col items-center pt-20 space-y-8 text-xl left-0" : "text-base sm:text-lg font-sans space-x-8 text-white hidden sm:block"}`}>
 
-                                    <Link to="/" className={`hover:text-rose-300 opacity-75 hover:opacity-100 transition ease-in-out duration-300 ${pathname == "/" && "opacity-100 text-rose-300"}`}>Home</Link> 
+                                    <Link to="/" className={`hover:text-rose-300 opacity-75 hover:opacity-100 transition ease-in-out duration-300 ${pathname == "/" && "opacity-100 text-rose-300"}`} onClick={() => setMobileMenu(false)}>Home</Link> 
 
-                                    <Link to="/playlists" className={`hover:text-rose-300 opacity-75 hover:opacity-100 transition ease-in-out duration-300 ${pathname == "/playlists" && "opacity-100 text-rose-300"}`}>Playlists</Link> 
+                                    <Link to="/playlists" className={`hover:text-rose-300 opacity-75 hover:opacity-100 transition ease-in-out duration-300 ${pathname == "/playlists" && "opacity-100 text-rose-300"}`} onClick={() => setMobileMenu(false)}>Playlists</Link> 
 
-                                    <Link to="/public" className={`hover:text-rose-300 opacity-75 hover:opacity-100 transition ease-in-out duration-300 ${pathname == "/public" && "opacity-100 text-rose-300"}`}>Public</Link> 
+                                    <Link to="/public" className={`hover:text-rose-300 opacity-75 hover:opacity-100 transition ease-in-out duration-300 ${pathname == "/public" && "opacity-100 text-rose-300"}`} onClick={() => setMobileMenu(false)}>Public</Link> 
 
                                     <button className="bg-rose-800 py-1 px-2 rounded cursor-pointer active:scale-90 transition duration-100" onClick={LogoutHandler} disabled={isLoading}>Logout</button>
 
                                 </nav>
                                 <div className="block sm:hidden">
-                                    <button className="text-2xl mx-2 cursor-pointer active:scale-90">☰</button>
+                                    <button className="text-2xl mx-2 cursor-pointer active:scale-90" onClick={() => setMobileMenu(true)}>☰</button>
                                 </div>
                             </>
                         :

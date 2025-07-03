@@ -23,8 +23,9 @@ function Home(){
                     </div>
                 }
                 <div>
-                    <div className="h-1 bg-gray-400 rounded-lg my-6 w-[250px] m-auto">
-                        <div className="h-full bg-red-400 w-1/5"></div>
+                    <div className="h-1 my-8 m-auto">
+                        <input type="range"  className="w-full appearance-none h-1 bg-rose-800 rounded"/>
+                        <span className="opacity-80 text-gray-400 text-center select-none">04:34</span>
                     </div>
                     <div className="select-none m-auto w-[150px] bg-blue-500 md:w-[200] relative ">
                         <span className="text-3xl cursor-pointer active:scale-80 duration-500 absolute left-0 text-rose-800">⏮</span>
@@ -36,7 +37,7 @@ function Home(){
                         {/* <audio src={music} controls/> */}
                     {/* ------------------ */}
                 </div>
-                <div className="mt-20 text-rose-300 text-lg font-bold font-monospace select-none text-center bg-">{playlistData.playlist_name}</div>
+                <div className="mt-20 text-rose-800 text-lg font-bold font-monospace select-none text-center bg-">{playlistData.playlist_name}</div>
             </section>
                 <div className="mt-20 text-red-500 text-lg font-bold font-monospace select-none text-center bg-">{error.length > 0 && error[0].msg}</div>
         </div>
