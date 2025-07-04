@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import useReqSinglePlaylist from "../hook/useReqSinglePlaylist";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay, faPause, faBackward, faForward } from '@fortawesome/free-solid-svg-icons';
+
+
 function Home(){
     const [ isLoading, error, playlistData] = useReqSinglePlaylist();
     const [ music,setMusic ] = useState(null);
@@ -117,18 +121,26 @@ function Home(){
 
                      {/* button */}
                     <div className="select-none m-auto w-[150px] relative top-12">
-                        <span className="text-3xl cursor-pointer active:scale-80 duration-500 absolute left-0 text-rose-800" onClick={() => previousBtn()}>⏮</span>
+                        <span className="text-3xl cursor-pointer active:scale-80 duration-500 absolute left-0 text-rose-800" onClick={() => previousBtn()}>
+                            <FontAwesomeIcon icon={faBackward} size="md" />
+                        </span>
                         
                         {
                             isPlaying ?
-                            <span className="text-3xl cursor-pointer active:scale-80 duration-500  absolute text-rose-800 left-16" onClick={() => setIsPlaying()}>⏸</span>
+                            <span className="text-3xl cursor-pointer active:scale-80 duration-500  absolute text-rose-800 left-16" onClick={() => setIsPlaying()}>
+                                <FontAwesomeIcon icon={faPause} size="md" />
+                            </span>
                             :
-                            <span className="text-3xl cursor-pointer active:scale-80 duration-500 absolute left-16 text-rose-800" onClick={() => setIsPlaying(true)}>▶</span>
+                            <span className="text-3xl cursor-pointer active:scale-80 duration-500 absolute left-16 text-rose-800" onClick={() => setIsPlaying(true)}>
+                                <FontAwesomeIcon icon={faPlay} size="md" />
+                            </span>
                         }
 
 
 
-                        <span className="text-3xl cursor-pointer active:scale-80 duration-500 absolute right-0 text-rose-800" onClick={() => nextBtn()}>⏭</span>
+                        <span className="text-3xl cursor-pointer active:scale-80 duration-500 absolute right-0 text-rose-800" onClick={() => nextBtn()}>
+                            <FontAwesomeIcon icon={faForward} size="md" />
+                        </span>
                     </div>
 
                     {/* ------------------ */}
