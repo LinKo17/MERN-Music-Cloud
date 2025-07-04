@@ -10,7 +10,7 @@ function Navigation (){
     const dispatch = useDispatch();
 
     const { pathname } = useLocation();
-    console.log(pathname);
+    // console.log(pathname);
 
     useEffect(() => {
 
@@ -41,7 +41,7 @@ function Navigation (){
     }
 
     const [ mobileMenu, setMobileMenu ] = useState(false)
-    console.log(mobileMenu)
+    // console.log(mobileMenu)
     return (
         <>
 

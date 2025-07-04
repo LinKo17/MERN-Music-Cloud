@@ -7,8 +7,9 @@ function SinglePlayList({obj}){
     const [ , , deleteSingleMusic] = useDeleteSingleMusic();
     const [ , , deleteSinglePlaylist] = useDeleteSinglePlaylist();
 
-    function playHandler(e){
-        document.cookie = `playingPT=${e}`
+    function playHandler(obj,e){
+        document.cookie = `playingPT=${obj.playlist_name}`
+        console.log(e)
         navigate('/');
     }
 
@@ -47,7 +48,7 @@ function SinglePlayList({obj}){
                             {e.split("_")[3].split(".")[0] } 
                         </div>
                         <div className="space-x-2 absolute right-0 top-10 opacity-0 group-hover:opacity-100 group-hover:top-1 transition-all duration-500">
-                            <span className="text-xl cursor-pointer" onClick={() => playHandler(obj.playlist_name)}>▶</span>
+                            <span className="text-xl cursor-pointer" onClick={() => playHandler(obj,e)}>▶</span>
                             <span className="text-xl cursor-pointer" onClick={() => deleteHandler(obj,e)}>🗑️</span>
                         </div>
                     </div>)
