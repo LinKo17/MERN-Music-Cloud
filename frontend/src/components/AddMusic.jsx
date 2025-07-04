@@ -50,7 +50,7 @@ function AddMusic(){
 
                     <div className="my-3 flex flex-col">
                         <label htmlFor="playlistTap" className="text-[17px]">Playlist</label>
-                        <select id="playlistTap" className="border mt-1 p-2 rounded focus:outline-none focus:ring-2 focus:ring-cyan-300" onChange={e => setUploadMusic({...uploadMusic, playlistOption : e.target.value})} value={uploadMusic.playlistOption}>
+                        <select id="playlistTap" className="border mt-1 p-2 rounded focus:outline-none focus:ring-2 focus:ring-cyan-300 bg-black text-white" onChange={e => setUploadMusic({...uploadMusic, playlistOption : e.target.value})} value={uploadMusic.playlistOption}>
                             <option value="new" >New</option>
                             {
                                playlistData.map(e => {

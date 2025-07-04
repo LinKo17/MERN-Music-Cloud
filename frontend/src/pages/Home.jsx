@@ -77,7 +77,7 @@ function Home(){
                     :
                     <div className="text-lg h-40 overflow-hidden overflow-y-scroll px-3 mb-4">
                         {
-                            playlistData.music_name.map((music,index) => <div key={index} className="border-b-1 text-rose-800 border-gray-400 text-center cursor-pointer hover:opacity-75 py-2 text-md font-sans" onClick={() => {
+                            playlistData.music_name.map((music,index) => <div key={index} className={`border-b-1 text-rose-800 border-gray-400 text-center cursor-pointer hover:opacity-75 py-2 text-md font-sans ${index == currentIndex ? "opacity-75" : "" }`} onClick={() => {
                                 setMusic(`${import.meta.env.VITE_BACKEND_UPLOADS_URL}/${music}`)
                                 setIsPlaying(true)
                                 setCurrentIndex(index)
@@ -116,14 +116,14 @@ function Home(){
                     </div>
 
                      {/* button */}
-                    <div className="select-none m-auto w-[150px] md:w-[200] relative top-12">
+                    <div className="select-none m-auto w-[150px] relative top-12">
                         <span className="text-3xl cursor-pointer active:scale-80 duration-500 absolute left-0 text-rose-800" onClick={() => previousBtn()}>⏮</span>
                         
                         {
                             isPlaying ?
-                            <span className="text-3xl cursor-pointer active:scale-80 duration-500  absolute text-rose-800 left-13 sm:left-16" onClick={() => setIsPlaying()}>⏸</span>
+                            <span className="text-3xl cursor-pointer active:scale-80 duration-500  absolute text-rose-800 left-16" onClick={() => setIsPlaying()}>⏸</span>
                             :
-                            <span className="text-3xl cursor-pointer active:scale-80 duration-500 absolute left-13 sm:left-16 text-rose-800" onClick={() => setIsPlaying(true)}>▶</span>
+                            <span className="text-3xl cursor-pointer active:scale-80 duration-500 absolute left-16 text-rose-800" onClick={() => setIsPlaying(true)}>▶</span>
                         }
 
 
